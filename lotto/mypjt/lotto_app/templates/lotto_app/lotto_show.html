@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto Number Analysis</title>
+</head>
+<body>
+    <h1>Lotto Number Analysis</h1>
+    <p>Most common numbers:</p>
+    <ul>
+        {% for number, count in most_common_numbers %}
+        <li>Number: {{ number }}, Count: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
