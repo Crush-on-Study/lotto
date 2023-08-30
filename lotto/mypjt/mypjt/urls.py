@@ -20,5 +20,7 @@ from lotto_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.lotto_analysis, name='lotto_analysis'),  # 기본 루트 URL로 변경
     path('lotto-analysis/', views.lotto_analysis, name='lotto_analysis'),
 ]
+
