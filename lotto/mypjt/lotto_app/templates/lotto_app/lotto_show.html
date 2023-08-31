@@ -3,15 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Analysis</title>
+    <title>로또 번호 분석 페이지!</title>
+    <style>
+        /* 테이블 스타일 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+    
+        /* 행운의 번호 스타일 */
+        #lucky-numbers {
+            list-style: none;
+            padding: 0;
+        }
+    
+        #lucky-numbers li {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <h1>Lotto Number Analysis</h1>
-    <p>Most common numbers:</p>
-    <ul>
+    <h2>가장 많이 당첨된 번호:</h2>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>1등 번호 당첨 횟수</th>
+        </tr>
         {% for number, count in most_common_numbers %}
-        <li>Number: {{ number }}, Count: {{ count }}</li>
+        <tr>
+            <td>{{ number }}</td>
+            <td>{{ count }}</td>
+        </tr>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </table>
+
+
+
+    <h2>이번주 행운의 로또 번호들:</h2>
+<ul id="lucky-numbers">
+    <!-- 여기에 JavaScript로 추가될 로또 번호들이 들어갈 예정입니다. -->
+</ul>
+
+<button id="generate-button">새로운 행운의 번호 뽑기</button>
+
+<script>
+    const generateButton = document.getElementById("generate-button");
+    const luckyNumbersList = document.getElementById("lucky-numbers");
+
+    generateButton.addEventListener("click", () => {
+        luckyNumbersList.innerHTML = ""; // 이전에 생성된 번호들 초기화
+
+        for (let t = 1; t <= 5; t++) {
+            const luckyNumbers = generate_lotto_numbers();
+            luckyNumbers.sort((a, b) => a - b); // 오름차순으로 정렬
+            const li = document.createElement("li");
+            li.textContent = `${t}번째 행운의 번호들: ${luckyNumbers.join(", ")}`;
+            luckyNumbersList.appendChild(li);
+        }
+    });
+
+    // 행운의 숫자 6개 뽑기
+    function generate_lotto_numbers() {
+        const lottoNumbers = [];
+        while (lottoNumbers.length < 6) {
+            const randomNumber = Math.floor(Math.random() * 45) + 1;
+            if (!lottoNumbers.includes(randomNumber)) {
+                lottoNumbers.push(randomNumber);
+            }
+        }
+        return lottoNumbers;
+    }
+</script>
